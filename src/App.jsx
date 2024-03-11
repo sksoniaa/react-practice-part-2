@@ -6,7 +6,7 @@
 // AND a setter function to update its value in the Virtual DOM.
 // [name, setName]
 import MyComponent from "./MyComponent"
-import Counter from "./Counter"
+//import Counter from "./Counter"
 
 
 function App() {
@@ -14,8 +14,7 @@ function App() {
 
   return (
     <>
-      <Counter />
-      <br /> <br /> <br />
+      {/* <Counter /> */}
       <MyComponent />
     </>
   )

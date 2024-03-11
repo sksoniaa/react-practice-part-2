@@ -103,37 +103,74 @@
 //   )
 // }
 
-import React, {useState} from 'react'
+// import React, {useState} from 'react'
 
 
-export default function MyComponent(){
+// export default function MyComponent(){
 
-  const [car, setCar] = useState({year: 2023,
-                                  make: "Audi",
-                                  model: "RSQ8"})
+//   const [car, setCar] = useState({year: 2023,
+//                                   make: "Audi",
+//                                   model: "RSQ8"})
 
 
-  function handleYearChange(e) {
-    setCar(c => ({...c, year: e.target.value}))
+//   function handleYearChange(e) {
+//     setCar(c => ({...c, year: e.target.value}))
+//   }
+
+//   function handleMakeChange(e) {
+//     setCar(c => ({...c, make: e.target.value}))
+//   }
+
+//   function handleModelChange(e) {
+//     setCar(c => ({...c, model: e.target.value}))
+//   }
+
+//   return(
+//     <>
+//       <div>
+//         <p>Your favorite car is: {car.year} {car.make} {car.model}</p>
+
+//         <input type="number" value={car.year} onChange={handleYearChange}/> <br />
+//         <input type="text" value={car.make} onChange={handleMakeChange}/> <br />
+//         <input type="text" value={car.model} onChange={handleModelChange}/> <br />
+//       </div>
+//     </>
+//   )
+// }
+
+import React, {useState} from "react";
+
+export default function MyComponent() {
+  const [foods, setFoods] = useState(['Apple', 'Orange', 'Banana'])
+
+  function handleAddClick() {
+
+    const newFood = document.getElementById("foodInput").value;
+    document.getElementById("foodInput").value = ""
+
+    setFoods(f => [...f, newFood])
   }
 
-  function handleMakeChange(e) {
-    setCar(c => ({...c, make: e.target.value}))
-  }
+  function handleRemoveClick(index) {
 
-  function handleModelChange(e) {
-    setCar(c => ({...c, model: e.target.value}))
+    setFoods(foods.filter((_, i) => i !== index)) 
   }
 
   return(
     <>
       <div>
-        <p>Your favorite car is: {car.year} {car.make} {car.model}</p>
+        <h2>List of Food</h2>
+        <ul>
+          {foods.map((food, index) =>
+          <li key={index} onClick={() => handleRemoveClick(index)}>
+            {food}
+          </li>)}
+        </ul>
 
-        <input type="number" value={car.year} onChange={handleYearChange}/> <br />
-        <input type="text" value={car.make} onChange={handleMakeChange}/> <br />
-        <input type="text" value={car.model} onChange={handleModelChange}/> <br />
+        <input type="text" id="foodInput" placeholder="Enter food name" />
+        <button onClick={handleAddClick}>Add food</button>
       </div>
     </>
   )
+
 }
