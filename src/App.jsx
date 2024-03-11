@@ -15,7 +15,7 @@ function App() {
   return (
     <>
       <Counter />
-      <br />
+      <br /> <br /> <br />
       <MyComponent />
     </>
   )
