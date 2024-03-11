@@ -141,34 +141,58 @@
 import React, {useState} from "react";
 
 export default function MyComponent() {
-  const [foods, setFoods] = useState(['Apple', 'Orange', 'Banana'])
 
-  function handleAddClick() {
+  const [cars, setCars] = useState([])
+  const [year, setYear] = useState(new Date().getFullYear())
+  const [make, setMake] = useState("")
+  const [model, setModel] = useState("")
 
-    const newFood = document.getElementById("foodInput").value;
-    document.getElementById("foodInput").value = ""
 
-    setFoods(f => [...f, newFood])
+  function handleAddCar() {
+    const newCar = {year: year, make: make, model: model}
+
+    setCars(c => [...c, newCar])
+
+    setYear(new Date().getFullYear())
+    setMake("")
+    setModel("")
   }
 
-  function handleRemoveClick(index) {
-
-    setFoods(foods.filter((_, i) => i !== index)) 
+  function handleRemoveCar(index) {
+    setCars(c => c.filter((_, i) => i !== index))
   }
+
+  function handleYearChange(e) {
+    setYear(e.target.value)
+  }
+
+  function handleMakeChange(e) {
+    setMake(e.target.value)
+
+  }
+
+  function handleModelChange(e) {
+    setModel(e.target.value)
+
+  }
+
+
 
   return(
     <>
       <div>
-        <h2>List of Food</h2>
+        <h2>List of Car Objects</h2>
+        <input type="number" value={year} onChange={handleYearChange} placeholder="Enter car year"/>
+        <input type="text" value={make} onChange={handleMakeChange} placeholder="Enter car make"/>
+        <input type="text" value={model} onChange={handleModelChange} placeholder="Enter car model"/>
+
+        <button onClick={handleAddCar}>Add car</button>
         <ul>
-          {foods.map((food, index) =>
-          <li key={index} onClick={() => handleRemoveClick(index)}>
-            {food}
+          {cars.map((car, index) =>
+          <li key={index}>{car.year} {car.make} {car.model}
+          <button onClick={() => handleRemoveCar(index)}>DELETE</button>
           </li>)}
         </ul>
-
-        <input type="text" id="foodInput" placeholder="Enter food name" />
-        <button onClick={handleAddClick}>Add food</button>
       </div>
     </>
   )
